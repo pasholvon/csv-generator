@@ -1,0 +1,17 @@
+{
+    "name": "pasholvon/csv-generator",
+    "description": "CSV generator that allows to use custom enclosures and delimiters.",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Maciej Jakubowski",
+            "email": "jakubowski421@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "autoload": {
+        "psr-4": {"Pasholvon\\": "src/"}
+    },
+    "require": {}
+}
