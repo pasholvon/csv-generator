@@ -8,11 +8,32 @@ class CsvGenerator {
 
   private $enclosure = '"';
 
-  /**
-   * @param mixed $delimiter
-   */
-  public function setDelimiter($delimiter) {
-    $this->delimiter = $delimiter;
+  private $startColumn;
+
+  private $startRow;
+
+  private $csv;
+
+  public function startGenerator($start_column = 0, $start_row = 0) {
+    $this->startColumn = $start_column;
+    $this->startRow = $start_row;
+    $this->csv = '';
+  }
+
+  public function addRow(array $row) {
+    if($this->enclosure !== '') {
+      $row = $this->encloseRow($row);
+    }
+    if($this->csv !== NULL) {
+      $this->csv .= implode($this->delimiter, $row) . PHP_EOL;
+    }
+  }
+
+  public function encloseRow(array $row): array {
+    foreach ($row as $value) {
+      $enclosed_row[] = str_pad($value, strlen($value) + 2, $this->enclosure, STR_PAD_BOTH);
+    }
+    return $enclosed_row;
   }
 
   /**
