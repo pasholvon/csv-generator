@@ -16,6 +16,17 @@ class CsvGenerator {
   }
 
   /**
+   * @param mixed $delimiter
+   */
+  public function setDelimiter(string $delimiter) {
+    if (strlen($delimiter) <= 1) {
+      $this->delimiter = $delimiter;
+    } else {
+      trigger_error('Delimiter can be maximum one character.', E_USER_ERROR);
+    }
+  }
+
+  /**
    * @return mixed
    */
   public function getDelimiter() {
@@ -25,8 +36,12 @@ class CsvGenerator {
   /**
    * @param mixed $enclosure
    */
-  public function setEnclosure($enclosure) {
-    $this->enclosure = $enclosure;
+  public function setEnclosure(string $enclosure) {
+    if (strlen($enclosure) <= 1) {
+      $this->enclosure = $enclosure;
+    } else {
+      throw new \Exception('Enclosure can be maximum one character.');
+    }
   }
 
   /**
