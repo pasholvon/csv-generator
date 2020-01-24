@@ -72,4 +72,11 @@ class CsvGenerator {
     return $this->enclosure;
   }
 
+  /**
+   * @return mixed
+   */
+  public function getCsv() {
+    return $this->csv;
+  }
+
 }
