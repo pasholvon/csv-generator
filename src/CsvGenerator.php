@@ -4,29 +4,61 @@ namespace Pasholvon;
 
 class CsvGenerator {
 
-  private $delimiter = ",";
+  private $delimiter = ',';
 
   private $enclosure = '"';
 
-  private $startColumn;
+  private $csv = '';
 
-  private $startRow;
+  private $start_column = 1;
 
-  private $csv;
+  private $start_row = 1;
 
-  public function startGenerator($start_column = 0, $start_row = 0) {
-    $this->startColumn = $start_column;
-    $this->startRow = $start_row;
+  /**
+   * Function prepends empty cells at the beginning  of the CSV.
+   *
+   * @param int $start_column
+   * @param int $start_row
+   */
+  public function startGenerator(int $start_column = 1, int $start_row = 1): void {
+    // Prepare empty cells for start column and row.
+    if ($start_column > 1 || $start_row > 1) {
+      $this->start_column = $start_column;
+      $this->start_row = $start_row;
+      $row = array_fill(0, $start_column -1 , "");
+      if (empty($row)) {
+        $row = ['',];
+      }
+      for ($i = 1; $i < $start_row; $i++) {
+        $this->addRow($row);
+      }
+    }
+  }
+
+  /**
+   *  Function resets class variables to default values.
+   */
+  public function endGenerator(): void {
+    $this->delimiter = ',';
+    $this->enclosure = '"';
     $this->csv = '';
   }
 
-  public function addRow(array $row) {
+  /**
+   * Function is responsible for adding row to the CSV.
+   *
+   * @param array $row
+   */
+  public function addRow(array $row): void {
+    if($this->start_column > 1) {
+      // Prepend empty column to the row.
+      $start_column_array = array_fill(0, $this->start_column - 1, '');
+      array_unshift($row, ...$start_column_array);
+    }
     if($this->enclosure !== '') {
       $row = $this->encloseRow($row);
     }
-    if($this->csv !== NULL) {
-      $this->csv .= implode($this->delimiter, $row) . PHP_EOL;
-    }
+    $this->csv .= implode($this->delimiter, $row) . PHP_EOL;
   }
 
   public function encloseRow(array $row): array {
@@ -39,7 +71,7 @@ class CsvGenerator {
   /**
    * @param mixed $delimiter
    */
-  public function setDelimiter(string $delimiter) {
+  public function setDelimiter(string $delimiter): void {
     if (strlen($delimiter) <= 1) {
       $this->delimiter = $delimiter;
     } else {
@@ -57,7 +89,7 @@ class CsvGenerator {
   /**
    * @param mixed $enclosure
    */
-  public function setEnclosure(string $enclosure) {
+  public function setEnclosure(string $enclosure): void {
     if (strlen($enclosure) <= 1) {
       $this->enclosure = $enclosure;
     } else {
