@@ -1,6 +1,6 @@
 {
     "name": "pasholvon/csv-generator",
-    "version": "1.0",
+    "version": "1.0.1",
     "description": "CSV generator that allows to use custom enclosures and delimiters.",
     "type": "library",
     "license": "MIT",
