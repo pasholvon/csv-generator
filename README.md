@@ -38,7 +38,7 @@ foreach ($rows as $row) {
 
 var_dump($csv_generator->getCsv());
 ```
-######Outputs:
+Outputs:
 
 ```
 "value4","value5","value6"
@@ -66,7 +66,7 @@ foreach ($rows as $row) {
 var_dump($csv_generator->getCsv());
 $csv_generator->endGenerator();
 ````
-######Outputs:
+Outputs:
 
 ```
 "","","",""
@@ -97,7 +97,7 @@ foreach ($rows as $row) {
 var_dump($csv_generator->getCsv());
 $csv_generator->endGenerator();
 ````
-######Outputs:
+Outputs:
 
 ```
 :value4:,:value5:,:value6:
@@ -124,7 +124,7 @@ foreach ($rows as $row) {
 var_dump($csv_generator->getCsv());
 $csv_generator->endGenerator();
 ````
-######Outputs:
+Outputs:
 
 ```
 "value4"|"value5"|"value6"
